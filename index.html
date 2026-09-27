@@ -6,11 +6,14 @@
   <meta name="theme-color" content="#050811">
   <meta name="description" content="NEWSFY — Notícias que conectam você ao mundo.">
   <title>NEWSFY — Notícias que conectam você ao mundo</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
-  <!-- Google Analytics 4 — NEWSFY -->
+
+  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ1JD133TZ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -19,151 +22,1253 @@
     gtag('config', 'G-XQ1JD133TZ');
   </script>
 </head>
-<body>
-  <noscript><div style="position:fixed;inset:0;z-index:99999;background:#050811;color:#fff;display:grid;place-items:center;padding:30px;text-align:center;font-family:Arial,sans-serif"><div><h2>NEWSFY</h2><p>Ative o JavaScript no navegador para visualizar o site.</p></div></div></noscript>
-  <div class="page-glow glow-a"></div>
-  <div class="page-glow glow-b"></div>
 
-  <header class="topbar">
-    <div class="topbar-inner">
-      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
-      <a class="brand" href="index.html" aria-label="NEWSFY início">
-        <img src="assets/logo-newsfy.png" alt="NEWSFY" class="brand-logo">
+<body>
+
+<noscript>
+  <div style="
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:#050811;
+    color:#fff;
+    display:grid;
+    place-items:center;
+    padding:30px;
+    text-align:center;
+    font-family:Arial,sans-serif;
+  ">
+    <div>
+      <h2>NEWSFY</h2>
+      <p>Ative o JavaScript no navegador para visualizar o site.</p>
+    </div>
+  </div>
+</noscript>
+
+<div class="page-glow glow-a"></div>
+<div class="page-glow glow-b"></div>
+
+<!-- ================= HEADER ================= -->
+
+<header class="topbar">
+  <div class="topbar-inner">
+
+    <button
+      class="icon-btn menu-toggle"
+      id="menuToggle"
+      aria-label="Abrir menu"
+      type="button">
+      ☰
+    </button>
+
+    <a class="brand" href="index.html" aria-label="NEWSFY início">
+      <img
+        src="assets/logo-newsfy.png"
+        alt="NEWSFY"
+        class="brand-logo">
+    </a>
+
+    <div class="top-search">
+      <span>⌕</span>
+      <input
+        id="globalSearch"
+        type="search"
+        placeholder="Pesquisar notícias..."
+        autocomplete="off">
+    </div>
+
+    <div class="top-actions">
+      <a class="top-link" href="noticias.html">
+        Todas as notícias
       </a>
-      <div class="top-search">
-        <span>⌕</span>
-        <input id="globalSearch" type="search" placeholder="Pesquisar notícias..." autocomplete="off">
-      </div>
-      <div class="top-actions">
-        <a class="top-link" href="noticias.html">Todas as notícias</a>
-        <button class="icon-btn" id="themeBtn" aria-label="Alternar visual">◐</button>
+
+      <button
+        class="icon-btn"
+        id="themeBtn"
+        aria-label="Alternar visual"
+        type="button">
+        ◐
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="left-sidebar" id="leftSidebar">
+
+  <div class="sidebar-brand">
+    <img src="assets/logo-newsfy.png" alt="NEWSFY">
+  </div>
+
+  <nav class="side-nav">
+
+    <div class="nav-label">NAVEGAÇÃO</div>
+
+    <a class="nav-item active" href="index.html">
+      <span>⌂</span> Início
+    </a>
+
+    <a class="nav-item" href="noticias.html">
+      <span>▤</span> Notícias
+    </a>
+
+    <button class="nav-item nav-category" data-category="Política" type="button">
+      <span>◈</span> Política
+    </button>
+
+    <button class="nav-item nav-category" data-category="Brasil" type="button">
+      <span>◉</span> Brasil
+    </button>
+
+    <button class="nav-item nav-category" data-category="Mundo" type="button">
+      <span>◎</span> Mundo
+    </button>
+
+    <button class="nav-item nav-category" data-category="Tecnologia" type="button">
+      <span>⌁</span> Tecnologia
+    </button>
+
+    <button class="nav-item nav-category" data-category="Esportes" type="button">
+      <span>◇</span> Esportes
+    </button>
+
+    <button class="nav-item nav-category" data-category="Entretenimento" type="button">
+      <span>✦</span> Entretenimento
+    </button>
+
+    <div class="nav-label nav-label-gap">EXPLORAR</div>
+
+    <a class="nav-item" href="#destaques">
+      <span>★</span> Destaques
+    </a>
+
+    <a class="nav-item" href="#publicidade">
+      <span>▣</span> Publicidade
+    </a>
+
+  </nav>
+
+  <div class="sidebar-bottom">
+
+    <div class="mini-card">
+      <span class="live-dot"></span>
+
+      <div>
+        <strong>NEWSFY</strong>
+        <small>Informação em movimento.</small>
       </div>
     </div>
-  </header>
 
-  <aside class="left-sidebar" id="leftSidebar">
-    <div class="sidebar-brand">
+  </div>
+
+</aside>
+
+<!-- ================= CONTEÚDO ================= -->
+
+<main class="site-main">
+
+  <!-- PUBLICIDADE TOPO -->
+  <section class="ad-slot ad-top-home">
+    <div class="ad-label">PUBLICIDADE</div>
+  </section>
+
+  <!-- HERO -->
+  <section class="hero">
+
+    <div class="hero-watermark">
       <img src="assets/logo-newsfy.png" alt="">
     </div>
-    <nav class="side-nav">
-      <div class="nav-label">NAVEGAÇÃO</div>
-      <a class="nav-item active" href="index.html"><span>⌂</span> Início</a>
-      <a class="nav-item" href="noticias.html"><span>▤</span> Notícias</a>
-      <button class="nav-item nav-category" data-category="Política"><span>◈</span> Política</button>
-      <button class="nav-item nav-category" data-category="Brasil"><span>◉</span> Brasil</button>
-      <button class="nav-item nav-category" data-category="Mundo"><span>◎</span> Mundo</button>
-      <button class="nav-item nav-category" data-category="Tecnologia"><span>⌁</span> Tecnologia</button>
-      <button class="nav-item nav-category" data-category="Esportes"><span>◇</span> Esportes</button>
-      <button class="nav-item nav-category" data-category="Entretenimento"><span>✦</span> Entretenimento</button>
-      <div class="nav-label nav-label-gap">EXPLORAR</div>
-      <a class="nav-item" href="#destaques"><span>★</span> Destaques</a>
-      <a class="nav-item" href="#publicidade"><span>▣</span> Publicidade</a>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="mini-card">
-        <span class="live-dot"></span>
-        <div><strong>NEWSFY</strong><small>Informação em movimento.</small></div>
+
+    <div class="hero-copy reveal">
+
+      <div class="eyebrow">
+        <span class="pulse"></span>
+        NEWSFY AGORA
       </div>
+
+      <h1>
+        Notícias que<br>
+        <em>conectam</em> você ao mundo.
+      </h1>
+
+      <p>
+        Informação, acontecimentos e histórias em um só lugar —
+        com uma experiência rápida, moderna e feita para você.
+      </p>
+
+      <div class="hero-actions">
+
+        <a class="btn btn-primary" href="#destaques">
+          Explorar destaques <span>→</span>
+        </a>
+
+        <a class="btn btn-ghost" href="noticias.html">
+          Ver todas <span>↗</span>
+        </a>
+
+      </div>
+
     </div>
-  </aside>
 
-  <main class="site-main">
-    <section class="ad-slot ad-top-home">
-      <div class="ad-label">PUBLICIDADE</div>
-    </section>
+    <div class="hero-stats reveal delay-1">
 
-    <section class="hero">
-      <div class="hero-watermark"><img src="assets/logo-newsfy.png" alt=""></div>
-      <div class="hero-copy reveal">
-        <div class="eyebrow"><span class="pulse"></span> NEWSFY AGORA</div>
-        <h1>Notícias que<br><em>conectam</em> você ao mundo.</h1>
-        <p>Informação, acontecimentos e histórias em um só lugar — com uma experiência rápida, moderna e feita para você.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#destaques">Explorar destaques <span>→</span></a>
-          <a class="btn btn-ghost" href="noticias.html">Ver todas <span>↗</span></a>
-        </div>
-      </div>
-      <div class="hero-stats reveal delay-1">
-        <div><strong id="newsCount">—</strong><span>notícias</span></div>
-        <div><strong>24h</strong><span>informação</span></div>
-        <div><strong>BR</strong><span>+ mundo</span></div>
-      </div>
-    </section>
-
-    <section class="content-layout">
-      <div class="feed-column">
-        <div class="section-head" id="destaques">
-          <div>
-            <span class="section-kicker">EM EVIDÊNCIA</span>
-            <h2>Principais notícias</h2>
-          </div>
-          <a href="noticias.html" class="see-all">Ver todas <span>→</span></a>
-        </div>
-        <div id="featuredGrid" class="featured-grid">
-          <div class="loading-card"><div class="spinner"></div><span>Carregando notícias...</span></div>
-        </div>
-
-        <section class="ad-slot ad-native-home">
-          <div class="ad-label">PUBLICIDADE</div>
-          <script async="async" data-cfasync="false" src="https://pl31540128.profitableratecpmnetwork.com/7e0aeeb2c0579c9c4279a2376812ee61/invoke.js"></script>
-          <div id="container-7e0aeeb2c0579c9c4279a2376812ee61"></div>
-        </section>
-
-        <div class="section-head compact">
-          <div>
-            <span class="section-kicker">MAIS RECENTES</span>
-            <h2>Últimas notícias</h2>
-          </div>
-        </div>
-        <div id="latestList" class="latest-list">
-          <div class="skeleton-list">
-            <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
-          </div>
-        </div>
+      <div>
+        <strong id="newsCount">—</strong>
+        <span>notícias</span>
       </div>
 
-      <aside class="right-sidebar">
-        <div class="right-title"><span>EM ALTA</span><i></i></div>
-        <div id="trendingList" class="trending-list"></div>
+      <div>
+        <strong>24h</strong>
+        <span>informação</span>
+      </div>
 
-        <div class="ad-panel" id="publicidade">
-          <div class="ad-top"><span>PUBLICIDADE</span><b>AD</b></div>
-          <div id="adContent" class="ad-content">
-            <span class="ad-icon">✦</span>
-            <strong>Seu anúncio aqui</strong>
-            <small>Conecte sua marca à audiência NEWSFY.</small>
-            <a href="#publicidade">Anunciar →</a>
-          </div>
-        </div>
-        </div>
+      <div>
+        <strong>BR</strong>
+        <span>+ mundo</span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ================= GRID ================= -->
+
+  <section class="content-layout">
+
+    <div class="feed-column">
+
+      <!-- DESTAQUES -->
+
+      <div class="section-head" id="destaques">
+
+        <div>
+          <span class="section-kicker">
+            EM EVIDÊNCIA
+          </span>
+
+          <h2>Principais notícias</h2>
         </div>
 
-        <div class="newsletter-card">
-          <div class="newsletter-icon">✉</div>
-          <span class="section-kicker">NEWSLETTER</span>
-          <h3>Receba o que importa.</h3>
-          <p>As principais notícias, direto para você.</p>
-          <form id="newsletterForm">
-            <input type="email" placeholder="seu@email.com" required>
-            <button type="submit">Inscrever</button>
-          </form>
-          <small id="newsletterMsg"></small>
+        <a href="noticias.html" class="see-all">
+          Ver todas <span>→</span>
+        </a>
+
+      </div>
+
+      <div id="featuredGrid" class="featured-grid">
+
+        <div class="loading-card">
+          <div class="spinner"></div>
+          <span>Carregando notícias...</span>
         </div>
-      </aside>
-    </section>
-  </main>
 
-  <footer class="footer">
-    <div class="footer-logo"><img src="assets/logo-newsfy.png" alt="NEWSFY"></div>
-    <p>© <span id="year"></span> NEWSFY. Notícias que conectam você ao mundo.</p>
-    <div class="footer-links"><a href="index.html">Início</a><a href="noticias.html">Notícias</a><a href="#publicidade">Publicidade</a></div>
-  </footer>
+      </div>
 
-  <div class="mobile-overlay" id="mobileOverlay"></div>
-  <!-- Adsterra / Profitablerate CPM — Popunder + Social Bar -->
-  <script src="https://pl31540127.profitableratecpmnetwork.com/d9/cb/52/d9cb52464b82f7c3d538985615c3f016.js"></script>
-  <script src="https://pl31540133.profitableratecpmnetwork.com/d1/c6/90/d1c69001ec540c1df4427d665a74484f.js"></script>
-  <script src="js/config.js"></script>
-  <script src="js/app.js"></script>
+      <!-- PUBLICIDADE MEIO -->
+
+      <section class="ad-slot ad-native-home">
+
+        <div class="ad-label">
+          PUBLICIDADE
+        </div>
+
+        <script
+          async="async"
+          data-cfasync="false"
+          src="https://pl31540128.profitableratecpmnetwork.com/7e0aeeb2c0579c9c4279a2376812ee61/invoke.js">
+        </script>
+
+        <div id="container-7e0aeeb2c0579c9c4279a2376812ee61"></div>
+
+      </section>
+
+      <!-- ÚLTIMAS -->
+
+      <div class="section-head compact">
+
+        <div>
+          <span class="section-kicker">
+            MAIS RECENTES
+          </span>
+
+          <h2>Últimas notícias</h2>
+        </div>
+
+      </div>
+
+      <div id="latestList" class="latest-list">
+
+        <div class="skeleton-list">
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= SIDEBAR DIREITA ================= -->
+
+    <aside class="right-sidebar">
+
+      <div class="right-title">
+        <span>EM ALTA</span>
+        <i></i>
+      </div>
+
+      <div id="trendingList" class="trending-list"></div>
+
+      <!-- PUBLICIDADE -->
+
+      <div class="ad-panel" id="publicidade">
+
+        <div class="ad-top">
+          <span>PUBLICIDADE</span>
+          <b>AD</b>
+        </div>
+
+        <div id="adContent" class="ad-content">
+
+          <span class="ad-icon">✦</span>
+
+          <strong>Seu anúncio aqui</strong>
+
+          <small>
+            Conecte sua marca à audiência NEWSFY.
+          </small>
+
+          <a href="#publicidade">
+            Anunciar →
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- NEWSLETTER -->
+
+      <div class="newsletter-card">
+
+        <div class="newsletter-icon">
+          ✉
+        </div>
+
+        <span class="section-kicker">
+          NEWSLETTER
+        </span>
+
+        <h3>
+          Receba o que importa.
+        </h3>
+
+        <p>
+          As principais notícias, direto para você.
+        </p>
+
+        <form id="newsletterForm">
+
+          <input
+            type="email"
+            placeholder="seu@email.com"
+            required>
+
+          <button type="submit">
+            Inscrever
+          </button>
+
+        </form>
+
+        <small id="newsletterMsg"></small>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+  <div class="footer-logo">
+    <img src="assets/logo-newsfy.png" alt="NEWSFY">
+  </div>
+
+  <p>
+    © <span id="year"></span>
+    NEWSFY.
+    Notícias que conectam você ao mundo.
+  </p>
+
+  <div class="footer-links">
+    <a href="index.html">Início</a>
+    <a href="noticias.html">Notícias</a>
+    <a href="#publicidade">Publicidade</a>
+  </div>
+
+</footer>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- ================= ADS ================= -->
+
+<script src="https://pl31540127.profitableratecpmnetwork.com/d9/cb/52/d9cb52464b82f7c3d538985615c3f016.js"></script>
+
+<script src="https://pl31540133.profitableratecpmnetwork.com/d1/c6/90/d1c69001ec540c1df4427d665a74484f.js"></script>
+
+
+<!-- =====================================================
+     NEWSFY — CARREGAMENTO DAS NOTÍCIAS
+     ===================================================== -->
+
+<script>
+
+const NEWSFY_API =
+  "https://Newsfy.ricardorodrigues0671.worker.dev";
+
+
+let todasNoticias = [];
+
+
+/* =====================================================
+   FUNÇÕES AUXILIARES
+   ===================================================== */
+
+function escaparHTML(valor) {
+
+  if (valor === null || valor === undefined) {
+    return "";
+  }
+
+  return String(valor)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+function formatarData(data) {
+
+  if (!data) {
+    return "";
+  }
+
+  const d = new Date(data);
+
+  if (isNaN(d.getTime())) {
+    return "";
+  }
+
+  return d.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric"
+  });
+}
+
+
+function obterImagem(noticia) {
+
+  let imagem = noticia.imagem_capa || noticia.imagem || "";
+
+  /*
+   * Caso o Baserow retorne uma lista de arquivos
+   */
+  if (Array.isArray(imagem)) {
+
+    if (imagem.length > 0) {
+
+      const arquivo = imagem[0];
+
+      if (typeof arquivo === "string") {
+        return arquivo;
+      }
+
+      if (arquivo && arquivo.url) {
+        return arquivo.url;
+      }
+
+    }
+
+  }
+
+  /*
+   * Caso seja objeto
+   */
+  if (typeof imagem === "object" && imagem !== null) {
+
+    if (imagem.url) {
+      return imagem.url;
+    }
+
+  }
+
+  return String(imagem || "");
+}
+
+
+function noticiaPublicada(noticia) {
+
+  /*
+   * Se não existir status,
+   * consideramos a notícia válida.
+   */
+  if (
+    noticia.status === null ||
+    noticia.status === undefined ||
+    noticia.status === ""
+  ) {
+    return true;
+  }
+
+  const status =
+    String(noticia.status)
+      .trim()
+      .toLowerCase();
+
+  return (
+    status === "publicado" ||
+    status === "publicada" ||
+    status === "publish" ||
+    status === "published"
+  );
+}
+
+
+function estaEmDestaque(noticia) {
+
+  const valor = noticia.destaque;
+
+  return (
+    valor === true ||
+    valor === 1 ||
+    String(valor).toLowerCase() === "true" ||
+    String(valor).toLowerCase() === "1"
+  );
+}
+
+
+/* =====================================================
+   CRIAR CARD PRINCIPAL
+   ===================================================== */
+
+function criarCardPrincipal(noticia) {
+
+  const id = noticia.id;
+
+  const titulo =
+    noticia.titulo ||
+    "Sem título";
+
+  const resumo =
+    noticia.resumo ||
+    "";
+
+  const categoria =
+    noticia.categoria ||
+    "Notícias";
+
+  const imagem =
+    obterImagem(noticia);
+
+  const data =
+    formatarData(noticia.data_publicacao);
+
+
+  const imagemHTML = imagem
+    ? `
+      <img
+        src="${escaparHTML(imagem)}"
+        alt="${escaparHTML(titulo)}"
+        loading="lazy"
+        onerror="this.style.display='none';">
+    `
+    : `
+      <div class="news-image-placeholder">
+        NEWSFY
+      </div>
+    `;
+
+
+  return `
+    <article class="news-card">
+
+      <a
+        href="noticia.html?id=${encodeURIComponent(id)}"
+        class="news-card-image">
+
+        ${imagemHTML}
+
+      </a>
+
+      <div class="news-card-body">
+
+        <span class="news-category">
+          ${escaparHTML(categoria)}
+        </span>
+
+        <h3>
+          <a href="noticia.html?id=${encodeURIComponent(id)}">
+            ${escaparHTML(titulo)}
+          </a>
+        </h3>
+
+        ${
+          resumo
+            ? `<p>${escaparHTML(resumo)}</p>`
+            : ""
+        }
+
+        <div class="news-meta">
+
+          ${
+            data
+              ? `<span>${escaparHTML(data)}</span>`
+              : ""
+          }
+
+          ${
+            noticia.autor
+              ? `<span>${escaparHTML(noticia.autor)}</span>`
+              : ""
+          }
+
+        </div>
+
+      </div>
+
+    </article>
+  `;
+}
+
+
+/* =====================================================
+   CARD DE ÚLTIMA NOTÍCIA
+   ===================================================== */
+
+function criarCardUltima(noticia) {
+
+  const id = noticia.id;
+
+  const titulo =
+    noticia.titulo ||
+    "Sem título";
+
+  const resumo =
+    noticia.resumo ||
+    "";
+
+  const categoria =
+    noticia.categoria ||
+    "Notícias";
+
+  const imagem =
+    obterImagem(noticia);
+
+  const data =
+    formatarData(noticia.data_publicacao);
+
+
+  return `
+    <article class="latest-item">
+
+      ${
+        imagem
+          ? `
+            <a
+              href="noticia.html?id=${encodeURIComponent(id)}"
+              class="latest-image">
+
+              <img
+                src="${escaparHTML(imagem)}"
+                alt="${escaparHTML(titulo)}"
+                loading="lazy"
+                onerror="this.style.display='none';">
+
+            </a>
+          `
+          : ""
+      }
+
+      <div class="latest-content">
+
+        <span class="news-category">
+          ${escaparHTML(categoria)}
+        </span>
+
+        <h3>
+          <a href="noticia.html?id=${encodeURIComponent(id)}">
+            ${escaparHTML(titulo)}
+          </a>
+        </h3>
+
+        ${
+          resumo
+            ? `<p>${escaparHTML(resumo)}</p>`
+            : ""
+        }
+
+        ${
+          data
+            ? `<small>${escaparHTML(data)}</small>`
+            : ""
+        }
+
+      </div>
+
+    </article>
+  `;
+}
+
+
+/* =====================================================
+   EM ALTA
+   ===================================================== */
+
+function criarTrending(noticia, indice) {
+
+  return `
+    <a
+      class="trending-item"
+      href="noticia.html?id=${encodeURIComponent(noticia.id)}">
+
+      <span class="trending-number">
+        ${String(indice + 1).padStart(2, "0")}
+      </span>
+
+      <div>
+
+        ${
+          noticia.categoria
+            ? `
+              <small>
+                ${escaparHTML(noticia.categoria)}
+              </small>
+            `
+            : ""
+        }
+
+        <strong>
+          ${escaparHTML(
+            noticia.titulo || "Sem título"
+          )}
+        </strong>
+
+      </div>
+
+    </a>
+  `;
+}
+
+
+/* =====================================================
+   RENDERIZAÇÃO
+   ===================================================== */
+
+function renderizarNoticias(lista) {
+
+  const featuredGrid =
+    document.getElementById("featuredGrid");
+
+  const latestList =
+    document.getElementById("latestList");
+
+  const trendingList =
+    document.getElementById("trendingList");
+
+  const newsCount =
+    document.getElementById("newsCount");
+
+
+  if (newsCount) {
+    newsCount.textContent = lista.length;
+  }
+
+
+  if (!lista.length) {
+
+    featuredGrid.innerHTML = `
+      <div class="loading-card">
+
+        <strong>Nenhuma notícia encontrada.</strong>
+
+        <span>
+          Cadastre uma notícia publicada no Baserow.
+        </span>
+
+      </div>
+    `;
+
+    latestList.innerHTML = "";
+    trendingList.innerHTML = "";
+
+    return;
+  }
+
+
+  /*
+   * Notícias em ordem de publicação
+   */
+  lista.sort((a, b) => {
+
+    const dataA =
+      new Date(a.data_publicacao || 0).getTime();
+
+    const dataB =
+      new Date(b.data_publicacao || 0).getTime();
+
+    return dataB - dataA;
+
+  });
+
+
+  /*
+   * Destaques:
+   * primeiro as marcadas como destaque.
+   * Depois as demais.
+   */
+  const destaques =
+    lista.filter(estaEmDestaque);
+
+  let principais =
+    destaques.length
+      ? destaques
+      : lista;
+
+
+  /*
+   * Máximo de 4 notícias na área principal
+   */
+  principais =
+    principais.slice(0, 4);
+
+
+  featuredGrid.innerHTML =
+    principais
+      .map(criarCardPrincipal)
+      .join("");
+
+
+  /*
+   * Últimas notícias
+   *
+   * Removemos as que já estão nos destaques
+   * quando possível.
+   */
+  const idsDestaques =
+    new Set(
+      principais.map(n => String(n.id))
+    );
+
+
+  let ultimas =
+    lista.filter(
+      n => !idsDestaques.has(String(n.id))
+    );
+
+
+  /*
+   * Se só houver uma notícia,
+   * ela também aparece nas últimas.
+   */
+  if (!ultimas.length) {
+    ultimas = lista;
+  }
+
+
+  latestList.innerHTML =
+    ultimas
+      .slice(0, 10)
+      .map(criarCardUltima)
+      .join("");
+
+
+  /*
+   * EM ALTA
+   */
+  trendingList.innerHTML =
+    lista
+      .slice(0, 5)
+      .map(criarTrending)
+      .join("");
+
+}
+
+
+/* =====================================================
+   BUSCAR NOTÍCIAS NO WORKER
+   ===================================================== */
+
+async function carregarNoticias() {
+
+  const featuredGrid =
+    document.getElementById("featuredGrid");
+
+  const latestList =
+    document.getElementById("latestList");
+
+
+  try {
+
+    const resposta =
+      await fetch(
+        NEWSFY_API + "/noticias?size=100",
+        {
+          method: "GET",
+          cache: "no-store"
+        }
+      );
+
+
+    if (!resposta.ok) {
+
+      throw new Error(
+        "Worker retornou HTTP " +
+        resposta.status
+      );
+
+    }
+
+
+    const dados =
+      await resposta.json();
+
+
+    console.log(
+      "NEWSFY — resposta do Worker:",
+      dados
+    );
+
+
+    /*
+     * IMPORTANTE:
+     *
+     * O Baserow retorna:
+     *
+     * {
+     *   count: 1,
+     *   next: null,
+     *   previous: null,
+     *   results: [...]
+     * }
+     *
+     * Portanto precisamos usar dados.results.
+     */
+
+    let resultados =
+      Array.isArray(dados.results)
+        ? dados.results
+        : [];
+
+
+    /*
+     * Mantém somente notícias publicadas.
+     */
+    resultados =
+      resultados.filter(noticiaPublicada);
+
+
+    todasNoticias =
+      resultados;
+
+
+    renderizarNoticias(
+      todasNoticias
+    );
+
+
+  } catch (erro) {
+
+    console.error(
+      "NEWSFY — erro ao carregar notícias:",
+      erro
+    );
+
+
+    featuredGrid.innerHTML = `
+      <div class="loading-card">
+
+        <strong>
+          Não foi possível carregar as notícias.
+        </strong>
+
+        <span>
+          Verifique a conexão com o servidor.
+        </span>
+
+        <button
+          type="button"
+          onclick="carregarNoticias()"
+          style="
+            margin-top:15px;
+            padding:10px 16px;
+            border:0;
+            border-radius:8px;
+            cursor:pointer;
+          ">
+
+          Tentar novamente
+
+        </button>
+
+      </div>
+    `;
+
+
+    latestList.innerHTML = "";
+
+  }
+
+}
+
+
+/* =====================================================
+   PESQUISA
+   ===================================================== */
+
+const globalSearch =
+  document.getElementById("globalSearch");
+
+
+if (globalSearch) {
+
+  globalSearch.addEventListener(
+    "input",
+    function() {
+
+      const termo =
+        this.value
+          .trim()
+          .toLowerCase();
+
+
+      if (!termo) {
+
+        renderizarNoticias(
+          [...todasNoticias]
+        );
+
+        return;
+      }
+
+
+      const filtradas =
+        todasNoticias.filter(noticia => {
+
+          const titulo =
+            String(
+              noticia.titulo || ""
+            ).toLowerCase();
+
+          const resumo =
+            String(
+              noticia.resumo || ""
+              ).toLowerCase();
+
+          const conteudo =
+            String(noticia.conteudo || ""
+                   )toLowerCase();
+
+          return (
+            titulo.includes(termo)||
+            resumo.includes(termo) ||
+            categoria.includes(termo)||
+            conteudo.includes(termo) ||
+            );
+
+        });
+
+    }
+
+  /* =====================================================
+   CATEGORIAS
+   ===================================================== */
+
+    document
+  .querySelectorAll("nav-category")
+  .forEach(botao => {
+    "cliclk",
+     function () {
+
+      const categoria =
+        this.dataset.category;
+
+      const filtradas =
+        todasNoticias.filter(noticia => {
+
+          return String(
+            noticia.categoria ||""
+            )
+          .trim()
+          .toLowerCase()
+          ===
+            String(categoria)
+          .trim()
+          .toLowerCase();
+        });
+
+       renderizarNoticias(
+         filtradas
+         );
+
+      document
+       .getElementById("destaques")
+       ?.scrollIntoView({
+         behavior:"smooth"
+       });
+
+     });
+
+});
+
+
+  /* =====================================================
+   MENU MOBILE
+   ===================================================== */
+
+  const menuToggle =
+    document.getElementById("menuToggle");
+
+  const leftSidebar =
+    document.getElementeById("leftsidebar");
+  const mobileOverlay =
+    documente.getElementById("mobileOverlay");
+
+function fecharMenu() {
+
+  if (leftSidebar) {
+    leftSidebar.classList.remove("open");
+  }
+
+  if (mobileOverlay) {
+    mobileOverlay.classList.remove("active");
+  }
+
+}
+
+  if (menuToggle) {
+
+  menuToggle.addEventlistener(
+    "click",
+    function(){
+
+    if (leftSidebar) {
+        leftSidebar.classList.toggle("open");
+      }
+
+      if (mobileOverlay) {
+        mobileOverlay.classList.toggle("active");
+      }
+
+    });
+
+}
+
+
+if (mobileOverlay) {
+
+  mobileOverlay.addEventListener(
+    "click",
+    fecharMenu
+  );
+
+}
+
+
+/* =====================================================
+   TEMA
+   ===================================================== */
+
+const themeBtn =
+  document.getElementById("themeBtn");
+
+
+if (themeBtn) {
+
+  themeBtn.addEventListener(
+    "click",
+    function() {
+
+      document.body.classList.toggle(
+        "light-theme"
+      );
+
+    });
+
+}
+
+
+/* =====================================================
+   NEWSLETTER
+   ===================================================== */
+
+const newsletterForm =
+  document.getElementById(
+    "newsletterForm"
+  );
+
+
+if (newsletterForm) {
+
+  newsletterForm.addEventListener(
+    "submit",
+    function(event) {
+
+      event.preventDefault();
+
+      const msg =
+        document.getElementById(
+          "newsletterMsg"
+        );
+
+
+      if (msg) {
+
+        msg.textContent =
+          "Inscrição registrada!";
+
+      }
+
+      this.reset();
+
+    });
+
+}
+
+
+/* =====================================================
+   ANO
+   ===================================================== */
+
+const year =
+  document.getElementById("year");
+
+
+if (year) {
+
+  year.textContent =
+    new Date().getFullYear();
+
+}
+
+
+/* =====================================================
+   INICIAR
+   ===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  carregarNoticias
+);
+
+</script>
+
 </body>
 </html>
