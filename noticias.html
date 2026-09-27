@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050811">
+  <title>Notícias — NEWSFY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Google Analytics 4 — NEWSFY -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ1JD133TZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XQ1JD133TZ');
+  </script>
+</head>
+<body>
+  <noscript><div style="position:fixed;inset:0;z-index:99999;background:#050811;color:#fff;display:grid;place-items:center;padding:30px;text-align:center;font-family:Arial,sans-serif"><div><h2>NEWSFY</h2><p>Ative o JavaScript no navegador para visualizar o site.</p></div></div></noscript>
+  <div class="page-glow glow-a"></div>
+  <div class="page-glow glow-b"></div>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="icon-btn menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+      <a class="brand" href="index.html"><img src="assets/logo-newsfy.png" alt="NEWSFY" class="brand-logo"></a>
+      <div class="top-search">
+        <span>⌕</span><input id="globalSearch" type="search" placeholder="Pesquisar notícias..." autocomplete="off">
+      </div>
+      <div class="top-actions">
+        <a class="top-link" href="index.html">Início</a>
+        <button class="icon-btn" id="themeBtn" aria-label="Alternar visual">◐</button>
+      </div>
+    </div>
+  </header>
+
+  <aside class="left-sidebar" id="leftSidebar">
+    <div class="sidebar-brand"><img src="assets/logo-newsfy.png" alt=""></div>
+    <nav class="side-nav">
+      <div class="nav-label">NAVEGAÇÃO</div>
+      <a class="nav-item" href="index.html"><span>⌂</span> Início</a>
+      <a class="nav-item active" href="noticias.html"><span>▤</span> Notícias</a>
+      <button class="nav-item nav-category" data-category="Política"><span>◈</span> Política</button>
+      <button class="nav-item nav-category" data-category="Brasil"><span>◉</span> Brasil</button>
+      <button class="nav-item nav-category" data-category="Mundo"><span>◎</span> Mundo</button>
+      <button class="nav-item nav-category" data-category="Tecnologia"><span>⌁</span> Tecnologia</button>
+      <button class="nav-item nav-category" data-category="Esportes"><span>◇</span> Esportes</button>
+      <button class="nav-item nav-category" data-category="Entretenimento"><span>✦</span> Entretenimento</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="mini-card"><span class="live-dot"></span><div><strong>NEWSFY</strong><small>Informação em movimento.</small></div></div></div>
+  </aside>
+
+  <main class="site-main news-page">
+    <section class="ad-slot ad-top-home news-ad-top">
+      <div class="ad-label">PUBLICIDADE</div>
+    </section>
+
+    <div class="page-header reveal">
+      <div>
+        <span class="section-kicker">CENTRAL DE NOTÍCIAS</span>
+        <h1>Todas as notícias</h1>
+        <p>Explore as últimas publicações e encontre o que interessa a você.</p>
+      </div>
+      <div class="result-pill"><span id="resultCount">0</span> resultados</div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="filter-scroll">
+        <button class="filter active" data-filter="Todos">Todos</button>
+        <button class="filter" data-filter="Brasil">Brasil</button>
+        <button class="filter" data-filter="Mundo">Mundo</button>
+        <button class="filter" data-filter="Política">Política</button>
+        <button class="filter" data-filter="Tecnologia">Tecnologia</button>
+        <button class="filter" data-filter="Esportes">Esportes</button>
+        <button class="filter" data-filter="Entretenimento">Entretenimento</button>
+      </div>
+    </div>
+
+    <section class="ad-slot ad-native-list">
+      <div class="ad-label">PUBLICIDADE</div>
+      <script async="async" data-cfasync="false" src="https://pl31540128.profitableratecpmnetwork.com/7e0aeeb2c0579c9c4279a2376812ee61/invoke.js"></script>
+      <div id="container-7e0aeeb2c0579c9c4279a2376812ee61"></div>
+    </section>
+
+    <div id="newsGrid" class="news-grid">
+      <div class="loading-card"><div class="spinner"></div><span>Carregando notícias...</span></div>
+    </div>
+
+    <div id="emptyState" class="empty-state hidden">
+      <div>⌕</div>
+      <h2>Nenhuma notícia encontrada</h2>
+      <p>Tente outro termo de busca ou categoria.</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-logo"><img src="assets/logo-newsfy.png" alt="NEWSFY"></div>
+    <p>© <span id="year"></span> NEWSFY. Notícias que conectam você ao mundo.</p>
+  </footer>
+
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+  <!-- Adsterra / Profitablerate CPM — Popunder + Social Bar -->
+  <script src="https://pl31540127.profitableratecpmnetwork.com/d9/cb/52/d9cb52464b82f7c3d538985615c3f016.js"></script>
+  <script src="https://pl31540133.profitableratecpmnetwork.com/d1/c6/90/d1c69001ec540c1df4427d665a74484f.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/noticias.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notícia — NEWSFY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+  <!-- Google Analytics 4 — NEWSFY -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQ1JD133TZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XQ1JD133TZ');
+  </script>
+</head>
+<body>
+  <noscript><div style="position:fixed;inset:0;z-index:99999;background:#050811;color:#fff;display:grid;place-items:center;padding:30px;text-align:center;font-family:Arial,sans-serif"><div><h2>NEWSFY</h2><p>Ative o JavaScript no navegador para visualizar o site.</p></div></div></noscript>
+<div class="page-glow glow-a"></div><div class="page-glow glow-b"></div>
+<header class="topbar"><div class="topbar-inner">
+<button class="icon-btn menu-toggle" id="menuToggle">☰</button><a class="brand" href="index.html"><img src="assets/logo-newsfy.png" alt="NEWSFY" class="brand-logo"></a>
+<div class="top-search"><span>⌕</span><input id="globalSearch" type="search" placeholder="Pesquisar notícias..."></div>
+<div class="top-actions"><a class="top-link" href="noticias.html">Todas as notícias</a><button class="icon-btn" id="themeBtn">◐</button></div>
+</div></header>
+<aside class="left-sidebar" id="leftSidebar"><div class="sidebar-brand"><img src="assets/logo-newsfy.png" alt=""></div><nav class="side-nav">
+<div class="nav-label">NAVEGAÇÃO</div><a class="nav-item" href="index.html"><span>⌂</span> Início</a><a class="nav-item active" href="noticias.html"><span>▤</span> Notícias</a>
+<button class="nav-item nav-category" data-category="Brasil"><span>◉</span> Brasil</button><button class="nav-item nav-category" data-category="Mundo"><span>◎</span> Mundo</button><button class="nav-item nav-category" data-category="Tecnologia"><span>⌁</span> Tecnologia</button><button class="nav-item nav-category" data-category="Esportes"><span>◇</span> Esportes</button>
+</nav></aside>
+<main class="site-main article-page">
+<section class="ad-slot ad-top-home article-ad-top">
+  <div class="ad-label">PUBLICIDADE</div>
+</section>
+<a class="back-link" href="noticias.html">← Voltar para notícias</a>
+<div id="articleRoot"><div class="loading-card"><div class="spinner"></div><span>Carregando notícia...</span></div></div>
+<section class="ad-slot ad-native-article">
+  <div class="ad-label">PUBLICIDADE</div>
+  <script async="async" data-cfasync="false" src="https://pl31540128.profitableratecpmnetwork.com/7e0aeeb2c0579c9c4279a2376812ee61/invoke.js"></script>
+  <div id="container-7e0aeeb2c0579c9c4279a2376812ee61"></div>
+</section>
+<section class="article-ad-row">
+  </div>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="footer-logo"><img src="assets/logo-newsfy.png" alt="NEWSFY"></div><p>© <span id="year"></span> NEWSFY.</p></footer>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<!-- Adsterra / Profitablerate CPM — Popunder + Social Bar -->
+<script src="https://pl31540127.profitableratecpmnetwork.com/d9/cb/52/d9cb52464b82f7c3d538985615c3f016.js"></script>
+<script src="https://pl31540133.profitableratecpmnetwork.com/d1/c6/90/d1c69001ec540c1df4427d665a74484f.js"></script>
+<script src="js/config.js"></script>
+<script>
+(async()=>{
+const C=window.NEWSFY_CONFIG,$=s=>document.querySelector(s),q=new URLSearchParams(location.search).get("id");
+const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const pick=(o,ks,f="")=>{for(const k of ks)if(o?.[k]!==undefined&&o[k]!==null&&String(o[k]).trim()!=="")return o[k];return f};
+function normalize(d){
+ const f=d?.fields||d?.field_1||d||{},r={...d,...f};
+ return {
+   id:r.id,
+   titulo:r.titulo??"Sem título",
+   slug:r.slug??"",
+   resumo:r.resumo??"",
+   conteudo:r.conteudo??"",
+   categoria:r.categoria??"Geral",
+   autor:r.autor??"NEWSFY",
+   imagem:r.imagem??"",
+   imagem_capa:r.imagem_capa??r.imagem??"",
+   data_publicacao:r.data_publicacao??"",
+   status:r.status??"",
+   destaque:r.destaque===true||r.destaque===1||r.destaque==="true"||r.destaque==="1",
+   visualizacoes:Number(r.visualizacoes??0),
+   tags:r.tags??"",
+   fonte:r.fonte??"",
+   url_fonte:r.url_fonte??"",
+   meta_description:r.meta_description??"",
+   criado_em:r.criado_em??"",
+   atualizado_em:r.atualizado_em??""
+ }
+}function date(v){if(!v)return"Agora";let d=new Date(v);return Number.isNaN(d.getTime())?v:new Intl.DateTimeFormat("pt-BR",{dateStyle:"long"}).format(d)}
+async function load(){
+try{
+ if(!q)throw Error("ID ausente");
+ const r=await fetch(C.API_BASE+C.ENDPOINTS.noticia+encodeURIComponent(q),{headers:{Accept:"application/json"},cache:"no-store"});
+ if(!r.ok)throw Error("HTTP "+r.status);
+ let d=await r.json(); d=d.data||d.noticia||d.result||d; const n=normalize(d);
+ $("#articleRoot").innerHTML=`<article class="article"><div class="article-head"><span class="category-badge static">${esc(n.categoria)}</span><h1>${esc(n.titulo)}</h1><p class="article-lead">${esc(n.resumo)}</p><div class="article-meta"><span>Por <b>${esc(n.autor)}</b></span><i></i><span>${esc(date(n.data))}</span></div></div>${(n.imagem_capa||n.imagem)?`<div class="article-cover"><img src="${esc(n.imagem_capa||n.imagem)}" alt="${esc(n.titulo)}"></div>`:""}<div class="article-body">${esc(n.conteudo||n.resumo).replace(/\n/g,"<br><br>")}</div><div class="article-share"><span>Compartilhar</span><button onclick="navigator.clipboard?.writeText(location.href)">Copiar link</button>${n.fonte?`<span class="source-label">Fonte: ${esc(n.fonte)}</span>`:""}${n.url_fonte?`<a class="source-link" href="${esc(n.url_fonte)}" target="_blank" rel="noopener">Fonte original ↗</a>`:""}</div></article>`;
+}catch(e){$("#articleRoot").innerHTML=`<div class="empty-state"><div>!</div><h2>Notícia não encontrada</h2><p>Verifique o endereço ou volte para a lista de notícias.</p><a class="btn btn-primary" href="noticias.html">Ver notícias</a></div>`}
+}
+$("#year").textContent=new Date().getFullYear();
+$("#menuToggle").onclick=()=>{$("#leftSidebar").classList.toggle("open");$("#mobileOverlay").classList.toggle("show")};
+$("#mobileOverlay").onclick=()=>{$("#leftSidebar").classList.remove("open");$("#mobileOverlay").classList.remove("show")};
+$("#themeBtn").onclick=()=>document.body.classList.toggle("soft-theme");
+document.querySelectorAll(".nav-category").forEach(b=>b.onclick=()=>location.href="noticias.html?categoria="+encodeURIComponent(b.dataset.category));
+load();
+})();
+</script>
+</body>
+</html>
