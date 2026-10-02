@@ -1,7 +1,7 @@
 window.NEWSFY_CONFIG = {
   // Worker confirmado online e com estas rotas:
   // /noticias | /noticia/:id | /publicidade
-  API_BASE: "https://newfy.ricardorodrigues0671.workers.dev",
+  API_BASE: "https://newsfy.ricardorodrigues0671.workers.dev",
 
   ENDPOINTS: {
     noticias: "/noticias",
