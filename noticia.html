@@ -209,740 +209,310 @@
 
   <!-- NOTÍCIA -->
   <script>
-  (() => {
+(async () => {
 
-    const CFG = window.NEWSFY_CONFIG;
+  const C = window.NEWSFY_CONFIG;
+  const $ = s => document.querySelector(s);
 
-    const $ = (selector) => document.querySelector(selector);
+  const q = new URLSearchParams(location.search).get("id");
 
-    const params = new URLSearchParams(window.location.search);
+  const esc = v =>
+    String(v ?? "").replace(/[&<>"']/g, c => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    }[c]));
 
-    const newsId = params.get("id");
+  function normalize(d) {
 
+    const f = d?.fields || d?.field_1 || d || {};
+    const r = { ...d, ...f };
 
-    /* =========================
-       ESCAPE HTML
-    ========================= */
+    return {
+      id: r.id,
+      titulo: r.titulo ?? "Sem título",
+      slug: r.slug ?? "",
+      resumo: r.resumo ?? "",
+      conteudo: r.conteudo ?? "",
+      categoria: r.categoria ?? "Geral",
+      autor: r.autor ?? "NEWSFY",
+      imagem: r.imagem ?? "",
+      imagem_capa: r.imagem_capa ?? r.imagem ?? "",
 
-    function esc(value) {
+      data_publicacao:
+        r.data_publicacao ??
+        r.data ??
+        r.created_at ??
+        "",
 
-      return String(value ?? "").replace(
-        /[&<>"']/g,
-        char => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        }[char])
-      );
+      status: r.status ?? "",
 
+      destaque:
+        r.destaque === true ||
+        r.destaque === 1 ||
+        r.destaque === "true" ||
+        r.destaque === "1",
+
+      visualizacoes: Number(r.visualizacoes ?? 0),
+
+      tags: r.tags ?? "",
+      fonte: r.fonte ?? "",
+      url_fonte: r.url_fonte ?? "",
+      meta_description: r.meta_description ?? "",
+      criado_em: r.criado_em ?? "",
+      atualizado_em: r.atualizado_em ?? ""
+    };
+  }
+
+  function date(v) {
+
+    if (!v) return "Agora";
+
+    const d = new Date(v);
+
+    if (Number.isNaN(d.getTime())) {
+      return String(v);
     }
 
+    return new Intl.DateTimeFormat("pt-BR", {
+      dateStyle: "long"
+    }).format(d);
+  }
 
-    /* =========================
-       NORMALIZAR NOTÍCIA
-    ========================= */
+  async function load() {
 
-    function normalize(data) {
+    try {
 
-      const fields =
-        data?.fields ||
-        data?.field_1 ||
-        data ||
-        {};
-
-      const raw = {
-        ...data,
-        ...fields
-      };
-
-      return {
-
-        id: raw.id ?? "",
-
-        titulo:
-          raw.titulo ??
-          raw.título ??
-          "Sem título",
-
-        slug:
-          raw.slug ??
-          "",
-
-        resumo:
-          raw.resumo ??
-          "",
-
-        conteudo:
-          raw.conteudo ??
-          raw.conteúdo ??
-          "",
-
-        categoria:
-          raw.categoria ??
-          "Geral",
-
-        autor:
-          raw.autor ??
-          "NEWSFY",
-
-        imagem:
-          raw.imagem ??
-          "",
-
-        imagem_capa:
-          raw.imagem_capa ??
-          raw.imagem ??
-          "",
-
-        data_publicacao:
-          raw.data_publicacao ??
-          raw.data ??
-          raw.created_at ??
-          "",
-
-        status:
-          raw.status ??
-          "",
-
-        destaque:
-          raw.destaque === true ||
-          raw.destaque === 1 ||
-          raw.destaque === "true" ||
-          raw.destaque === "1",
-
-        visualizacoes:
-          Number(raw.visualizacoes ?? 0),
-
-        tags:
-          raw.tags ??
-          "",
-
-        fonte:
-          raw.fonte ??
-          "",
-
-        url_fonte:
-          raw.url_fonte ??
-          "",
-
-        meta_description:
-          raw.meta_description ??
-          "",
-
-        criado_em:
-          raw.criado_em ??
-          "",
-
-        atualizado_em:
-          raw.atualizado_em ??
-          ""
-
-      };
-
-    }
-
-
-    /* =========================
-       DATA
-    ========================= */
-
-    function formatDate(value) {
-
-      if (!value) {
-        return "Agora";
+      if (!C) {
+        throw new Error("config.js não carregou");
       }
 
-      const date = new Date(value);
-
-      if (Number.isNaN(date.getTime())) {
-        return String(value);
+      if (!q) {
+        throw new Error("ID ausente na URL");
       }
 
-      return new Intl.DateTimeFormat(
-        "pt-BR",
-        {
-          day: "2-digit",
-          month: "long",
-          year: "numeric"
-        }
-      ).format(date);
+      const url =
+        C.API_BASE +
+        C.ENDPOINTS.noticia +
+        encodeURIComponent(q);
 
-    }
+      console.log("NEWSFY - buscando notícia:", url);
 
+      const r = await fetch(url, {
+        headers: {
+          Accept: "application/json"
+        },
+        cache: "no-store"
+      });
 
-    /* =========================
-       CONTEÚDO
-    ========================= */
+      console.log("NEWSFY - status:", r.status);
 
-    function formatContent(value) {
-
-      if (!value) {
-        return "";
+      if (!r.ok) {
+        throw new Error("HTTP " + r.status);
       }
 
-      return esc(value)
-        .replace(/\r\n/g, "\n")
-        .replace(/\n/g, "<br><br>");
+      let d = await r.json();
 
-    }
+      console.log("NEWSFY - resposta:", d);
 
+      d =
+        d?.data ??
+        d?.noticia ??
+        d?.result ??
+        d;
 
-    /* =========================
-       CARREGAR NOTÍCIA
-    ========================= */
+      if (Array.isArray(d)) {
+        d = d[0];
+      }
 
-    async function loadArticle() {
+      if (!d) {
+        throw new Error("Notícia vazia");
+      }
 
-      const root = $("#articleRoot");
+      const n = normalize(d);
 
-      try {
+      console.log("NEWSFY - notícia normalizada:", n);
 
-        if (!newsId) {
-          throw new Error("ID da notícia ausente.");
-        }
+      if (!n.titulo || n.titulo === "Sem título") {
+        throw new Error("A resposta não possui o campo titulo");
+      }
 
-        if (!CFG || !CFG.API_BASE) {
-          throw new Error("Configuração da API não encontrada.");
-        }
+      const conteudo =
+        n.conteudo ||
+        n.resumo ||
+        "Esta notícia ainda não possui conteúdo.";
 
-        const endpoint =
-          CFG.API_BASE +
-          CFG.ENDPOINTS.noticia +
-          encodeURIComponent(newsId);
+      $("#articleRoot").innerHTML = `
+        <article class="article">
 
+          <div class="article-head">
 
-        console.log(
-          "NEWSFY → carregando notícia:",
-          endpoint
-        );
-
-
-        const response = await fetch(
-          endpoint,
-          {
-            method: "GET",
-            headers: {
-              "Accept": "application/json"
-            },
-            cache: "no-store"
-          }
-        );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Worker respondeu HTTP " +
-            response.status
-          );
-
-        }
-
-
-        let data = await response.json();
-
-
-        /*
-         * Aceita diferentes formatos
-         * que o Worker pode retornar.
-         */
-
-        if (data?.data) {
-          data = data.data;
-        }
-
-        if (data?.noticia) {
-          data = data.noticia;
-        }
-
-        if (data?.result) {
-          data = data.result;
-        }
-
-
-        /*
-         * Caso o Worker retorne:
-         *
-         * { results: [ ... ] }
-         */
-
-        if (
-          Array.isArray(data?.results)
-        ) {
-
-          data = data.results[0];
-
-        }
-
-
-        if (!data) {
-          throw new Error(
-            "Worker não retornou a notícia."
-          );
-        }
-
-
-        const news = normalize(data);
-
-
-        if (!news.titulo) {
-          throw new Error(
-            "Notícia retornada sem título."
-          );
-        }
-
-
-        /* =========================
-           IMAGEM
-        ========================= */
-
-        const imageHTML =
-          news.imagem_capa || news.imagem
-          ? `
-            <div class="article-cover">
-
-              <img
-                src="${esc(news.imagem_capa || news.imagem)}"
-                alt="${esc(news.titulo)}"
-              >
-
-            </div>
-          `
-          : "";
-
-
-        /* =========================
-           FONTE
-        ========================= */
-
-        let sourceHTML = "";
-
-        if (news.fonte) {
-
-          sourceHTML += `
-            <span class="source-label">
-              Fonte: ${esc(news.fonte)}
+            <span class="category-badge static">
+              ${esc(n.categoria)}
             </span>
-          `;
 
-        }
+            <h1>${esc(n.titulo)}</h1>
 
-
-        if (news.url_fonte) {
-
-          sourceHTML += `
-            <a
-              class="source-link"
-              href="${esc(news.url_fonte)}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Fonte original ↗
-            </a>
-          `;
-
-        }
-
-
-        /* =========================
-           ARTIGO
-        ========================= */
-
-        root.innerHTML = `
-
-          <article class="article">
-
-            <div class="article-head">
-
-              <span class="category-badge static">
-                ${esc(news.categoria)}
-              </span>
-
-              <h1>
-                ${esc(news.titulo)}
-              </h1>
-
-              ${
-                news.resumo
-                  ? `
-                    <p class="article-lead">
-                      ${esc(news.resumo)}
-                    </p>
-                  `
-                  : ""
-              }
-
-              <div class="article-meta">
-
-                <span>
-                  Por
-                  <b>${esc(news.autor)}</b>
-                </span>
-
-                <i></i>
-
-                <span>
-                  ${esc(
-                    formatDate(
-                      news.data_publicacao
-                    )
-                  )}
-                </span>
-
-              </div>
-
-            </div>
-
-
-            ${imageHTML}
-
-
-            <div class="article-body">
-
-              ${
-                formatContent(
-                  news.conteudo ||
-                  news.resumo
-                )
-              }
-
-            </div>
-
-
-            <div class="article-share">
-
-              <span>
-                Compartilhar
-              </span>
-
-              <button
-                type="button"
-                id="copyLinkBtn"
-              >
-                Copiar link
-              </button>
-
-              ${sourceHTML}
-
-            </div>
-
-          </article>
-
-        `;
-
-
-        /* =========================
-           COPIAR LINK
-        ========================= */
-
-        $("#copyLinkBtn")?.addEventListener(
-          "click",
-          async () => {
-
-            try {
-
-              await navigator.clipboard.writeText(
-                window.location.href
-              );
-
-              $("#copyLinkBtn").textContent =
-                "Link copiado!";
-
-              setTimeout(() => {
-
-                $("#copyLinkBtn").textContent =
-                  "Copiar link";
-
-              }, 2000);
-
-            } catch (error) {
-
-              console.warn(
-                "Não foi possível copiar o link.",
-                error
-              );
-
-            }
-
-          }
-        );
-
-
-        /* =========================
-           SEO
-        ========================= */
-
-        if (news.meta_description) {
-
-          let meta =
-            document.querySelector(
-              'meta[name="description"]'
-            );
-
-          if (!meta) {
-
-            meta =
-              document.createElement("meta");
-
-            meta.name = "description";
-
-            document.head.appendChild(meta);
-
-          }
-
-          meta.content =
-            news.meta_description;
-
-        }
-
-
-        /*
-         * Atualiza título da aba.
-         */
-
-        document.title =
-          news.titulo + " — NEWSFY";
-
-
-        /*
-         * Analytics da notícia.
-         */
-
-        if (
-          typeof gtag === "function"
-        ) {
-
-          gtag(
-            "event",
-            "view_news",
-            {
-              news_id: String(news.id),
-              news_title: news.titulo,
-              news_category: news.categoria
-            }
-          );
-
-        }
-
-
-      } catch (error) {
-
-        console.error(
-          "NEWSFY: erro ao carregar notícia:",
-          error
-        );
-
-
-        root.innerHTML = `
-
-          <div class="empty-state">
-
-            <div>!</div>
-
-            <h2>
-              Notícia não encontrada
-            </h2>
-
-            <p>
-              Não foi possível carregar esta notícia.
-              Verifique o endereço ou tente novamente.
+            <p class="article-lead">
+              ${esc(n.resumo)}
             </p>
 
-            <a
-              class="btn btn-primary"
-              href="noticias.html"
-            >
-              Ver notícias
-            </a>
+            <div class="article-meta">
+
+              <span>
+                Por <b>${esc(n.autor)}</b>
+              </span>
+
+              <i></i>
+
+              <span>
+                ${esc(date(n.data_publicacao))}
+              </span>
+
+            </div>
 
           </div>
 
-        `;
-
-      }
-
-    }
-
-
-    /* =========================
-       MENU
-    ========================= */
-
-    function setupMenu() {
-
-      const sidebar =
-        $("#leftSidebar");
-
-      const overlay =
-        $("#mobileOverlay");
-
-      const button =
-        $("#menuToggle");
-
-
-      function closeMenu() {
-
-        sidebar?.classList.remove("open");
-
-        overlay?.classList.remove("show");
-
-      }
-
-
-      button?.addEventListener(
-        "click",
-        () => {
-
-          sidebar?.classList.toggle("open");
-
-          overlay?.classList.toggle("show");
-
-        }
-      );
-
-
-      overlay?.addEventListener(
-        "click",
-        closeMenu
-      );
-
-
-      document
-        .querySelectorAll(".nav-category")
-        .forEach(button => {
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              const category =
-                button.dataset.category;
-
-              window.location.href =
-                "noticias.html?categoria=" +
-                encodeURIComponent(category);
-
-            }
-          );
-
-        });
-
-    }
-
-
-    /* =========================
-       TEMA
-    ========================= */
-
-    function setupTheme() {
-
-      const button =
-        $("#themeBtn");
-
-
-      if (
-        localStorage.getItem(
-          "newsfy-theme"
-        ) === "soft"
-      ) {
-
-        document.body.classList.add(
-          "soft-theme"
-        );
-
-      }
-
-
-      button?.addEventListener(
-        "click",
-        () => {
-
-          document.body.classList.toggle(
-            "soft-theme"
-          );
-
-
-          localStorage.setItem(
-            "newsfy-theme",
-
-            document.body.classList.contains(
-              "soft-theme"
-            )
-              ? "soft"
-              : "dark"
-          );
-
-        }
-      );
-
-    }
-
-
-    /* =========================
-       BUSCA
-    ========================= */
-
-    function setupSearch() {
-
-      const input =
-        $("#globalSearch");
-
-
-      input?.addEventListener(
-        "keydown",
-        event => {
-
-          if (
-            event.key === "Enter"
-          ) {
-
-            const value =
-              input.value.trim();
-
-
-            window.location.href =
-              "noticias.html" +
-              (
-                value
-                  ? "?busca=" +
-                    encodeURIComponent(value)
-                  : ""
-              );
-
+          ${
+            n.imagem_capa || n.imagem
+              ? `
+                <div class="article-cover">
+                  <img
+                    src="${esc(n.imagem_capa || n.imagem)}"
+                    alt="${esc(n.titulo)}"
+                  >
+                </div>
+              `
+              : ""
           }
 
-        }
+          <div class="article-body">
+            ${esc(conteudo).replace(/\n/g, "<br><br>")}
+          </div>
+
+          <div class="article-share">
+
+            <span>Compartilhar</span>
+
+            <button
+              onclick="navigator.clipboard?.writeText(location.href)"
+            >
+              Copiar link
+            </button>
+
+            ${
+              n.fonte
+                ? `
+                  <span class="source-label">
+                    Fonte: ${esc(n.fonte)}
+                  </span>
+                `
+                : ""
+            }
+
+            ${
+              n.url_fonte
+                ? `
+                  <a
+                    class="source-link"
+                    href="${esc(n.url_fonte)}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    Fonte original ↗
+                  </a>
+                `
+                : ""
+            }
+
+          </div>
+
+        </article>
+      `;
+
+      document.title = n.titulo + " — NEWSFY";
+
+      const meta = document.querySelector(
+        'meta[name="description"]'
       );
 
-    }
-
-
-    /* =========================
-       INIT
-    ========================= */
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
-
-        $("#year").textContent =
-          new Date().getFullYear();
-
-        setupMenu();
-
-        setupTheme();
-
-        setupSearch();
-
-        loadArticle();
-
+      if (meta && n.meta_description) {
+        meta.setAttribute(
+          "content",
+          n.meta_description
+        );
       }
-    );
 
-  })();
-  </script>
+    } catch (e) {
+
+      console.error("NEWSFY - erro ao carregar notícia:", e);
+
+      $("#articleRoot").innerHTML = `
+        <div class="empty-state">
+
+          <div>!</div>
+
+          <h2>Não foi possível carregar a notícia</h2>
+
+          <p>
+            ${esc(e.message || "Erro desconhecido")}
+          </p>
+
+          <a
+            class="btn btn-primary"
+            href="noticias.html"
+          >
+            Ver notícias
+          </a>
+
+        </div>
+      `;
+    }
+  }
+
+  $("#year").textContent =
+    new Date().getFullYear();
+
+  $("#menuToggle").onclick = () => {
+
+    $("#leftSidebar").classList.toggle("open");
+    $("#mobileOverlay").classList.toggle("show");
+
+  };
+
+  $("#mobileOverlay").onclick = () => {
+
+    $("#leftSidebar").classList.remove("open");
+    $("#mobileOverlay").classList.remove("show");
+
+  };
+
+  $("#themeBtn").onclick = () => {
+
+    document.body.classList.toggle("soft-theme");
+
+  };
+
+  document
+    .querySelectorAll(".nav-category")
+    .forEach(b => {
+
+      b.onclick = () => {
+
+        location.href =
+          "noticias.html?categoria=" +
+          encodeURIComponent(b.dataset.category);
+
+      };
+
+    });
+
+  load();
+
+})();
+</script>
 
 </body>
 </html>
